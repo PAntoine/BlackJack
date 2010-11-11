@@ -5,6 +5,7 @@ public class CardDeck
 {
 	private Card m_deck[];
 	private int m_card_index;
+	private int m_cards_dealt;
 	
 	public void CreateDeck ()
 	{
@@ -30,7 +31,7 @@ public class CardDeck
 		m_deck[51].SetNext(-1);
 		
 		// force shuffle on next read.
-		m_card_index = 42;
+		m_cards_dealt = 43;
 	}
 	
 	public void Shuffle()
@@ -57,6 +58,8 @@ public class CardDeck
 				break;
 			}
 		}
+
+		m_cards_dealt = 0;
 	}
 	
 	public void Remove(int card)
@@ -87,6 +90,7 @@ public class CardDeck
 	{ 
 		int result = m_card_index;
 		m_card_index = m_deck[m_card_index].GetNext();
+		m_cards_dealt++;
 		
 		return result;
 	}
@@ -104,6 +108,7 @@ public class CardDeck
 		state.putIntArray("prev_list",prev_array);
 		state.putIntArray("next_array", next_array);
 		state.putInt("card_index",m_card_index);
+		state.putInt("cards_dealt",m_cards_dealt);
 	}
 	
 	public void LoadState(Bundle state)
@@ -111,15 +116,17 @@ public class CardDeck
 		int[] prev_array = state.getIntArray("prev_list");
 		int[] next_array = state.getIntArray("next_array");
 
-		m_card_index = state.getInt("cardIndex");
+		m_cards_dealt = state.getInt("cards_dealt");
+		m_card_index = state.getInt("card_index");
 		
 		for (int count=0; count<52; count++)
 		{
-			m_deck[count].SetNextPrev(prev_array[count],next_array[count]);
+			m_deck[count].SetNextPrev(next_array[count],prev_array[count]);
+
 		}
 	}
 	
 	public int GetCardResource(int card){return m_deck[card].GetResource();}
-	public boolean NeedShuffle() { return m_card_index > 42?true:false; }
+	public boolean NeedShuffle() { return m_cards_dealt > 42?true:false; }
 	public int GetCardValue(int card){return m_deck[card].GetValue();}
 }
