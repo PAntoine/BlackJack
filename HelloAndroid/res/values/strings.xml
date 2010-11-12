@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="hello">Simple BlackJack</string>
-    <string name="app_name">Simple Blackjack</string>
-    <string name="twist">Twist</string>
-    <string name="stick">Stick</string>
-    <string name="redeal">Redeal</string>
-</resources>
