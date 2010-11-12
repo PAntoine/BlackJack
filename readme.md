@@ -1,4 +1,3 @@
-
 Blackjack
 ==============
 
@@ -19,6 +18,9 @@ is here.
 
 Building and running
 --------------------
+
+To tell the build where your android sdk dir is, you need to change the
+*local.properties* file. The *sdk_dir* variable needs changing.
 
 *cd* to the Blackjack directory and call:
 	ant debug
