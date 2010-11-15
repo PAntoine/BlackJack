@@ -40,9 +40,9 @@
 		   />
 	</TableRow>
 	<TableRow android:gravity="center_horizontal">
-		<Button android:id="@+id/twist" android:text="@string/twist" android:onClick="twist" android:layout_width="fill_parent" android:layout_weight="1"/>
-		<Button android:id="@+id/stick" android:text="@string/stick" android:onClick="stick" android:layout_width="fill_parent" android:layout_weight="1"/>
-		<Button android:id="@+id/redeal" android:text="@string/redeal" android:onClick="redeal" android:layout_width="fill_parent" android:layout_weight="1"/>
+		<Button android:id="@+id/twist" android:text="@string/twist" android:layout_width="fill_parent" android:layout_weight="1"/>
+		<Button android:id="@+id/stick" android:text="@string/stick" android:layout_width="fill_parent" android:layout_weight="1"/>
+		<Button android:id="@+id/redeal" android:text="@string/redeal" android:layout_width="fill_parent" android:layout_weight="1"/>
 	</TableRow>
 	<TableRow android:gravity="center_horizontal">
 		<TextView android:text="@+id/TextView02" android:id="@+id/TextView02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"></TextView>

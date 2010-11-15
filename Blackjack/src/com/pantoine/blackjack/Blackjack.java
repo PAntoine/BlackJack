@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import android.util.Log;
+
 public class Blackjack extends Activity
 {
 	CardDeck	m_deck;
@@ -33,6 +35,7 @@ public class Blackjack extends Activity
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
+		Log.v("Blackjack","On Create");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
@@ -101,8 +104,17 @@ public class Blackjack extends Activity
 		}
 		else
 		{
+			Log.v("Backjack","ReCreate");
 			LoadState(savedInstanceState);
 		}
+	}
+
+	@Override
+	public void onStart()
+	{
+		super.onStart();
+
+		Log.v("Blackjack","On Start called");
 	}
 	
 	public void reDeal()
@@ -142,7 +154,32 @@ public class Blackjack extends Activity
 		// clear dealer text
 		m_dealer_text.setText("[Dealer] 0");
 	}
-	
+
+	public void onPause()
+	{
+		super.onPause();
+		Log.v("Blackjack","onPause() called");
+	}
+
+	public void onResume()
+	{
+		super.onResume();
+
+		Log.v("Blackjack","onResume() called");
+	}
+
+	public void onStop()
+	{
+		super.onStop();
+		Log.v("Blackjack","onStop() called");
+	}
+
+	public void onDestroy()
+	{
+		super.onDestroy();
+		Log.v("Blackjack","onDestroy() called");
+	}
+
 	public void dealCard()
 	{
 		int num_aces = 0;
