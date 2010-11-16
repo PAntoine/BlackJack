@@ -5,6 +5,7 @@
     <string name="twist">Twist</string>
     <string name="stick">Stick</string>
     <string name="play">Play</string>
+    <string name="add_player">Add Player</string>
     <string name="remove_player">Remove Player</string>
     <string name="redeal">Redeal</string>
 	<string name="player_select">Please Select a Player</string>

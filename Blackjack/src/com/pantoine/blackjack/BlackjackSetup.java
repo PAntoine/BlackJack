@@ -22,6 +22,12 @@ public class BlackjackSetup extends Activity
 		setContentView(R.layout.blackjacksetup);
 
 		final EditText edittext = (EditText) findViewById(R.id.edittext);
+		
+		if (edittext == null)
+		{
+			Log.v("BlackjackSetup","did not find the edittext resource" + edittext.getClass().getName());
+		}
+		
 		edittext.setOnKeyListener(new OnKeyListener() 
 			{
 				public boolean onKey(View v, int keyCode, KeyEvent event) 
@@ -31,6 +37,8 @@ public class BlackjackSetup extends Activity
 					{
 						int	num_players = 0;
 						SharedPreferences preferences = getSharedPreferences(BlackjackSetup.this.getApplication().getPackageName(),MODE_PRIVATE);
+						num_players = preferences.getInt("registered_players",0);
+
 						String player_name = edittext.getText().toString();
 
 						// find if the players name is in the resources

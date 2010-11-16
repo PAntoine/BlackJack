@@ -2,6 +2,7 @@ package com.pantoine.blackjack;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -114,7 +115,10 @@ public class Blackjack extends Activity
 	{
 		super.onStart();
 
-		Log.v("Blackjack","On Start called");
+		Intent start_intent = getIntent();
+
+		String title = "Blackjack: " + start_intent.getStringExtra("player_name");
+		setTitle(title);
 	}
 	
 	public void reDeal()
