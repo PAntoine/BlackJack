@@ -46,6 +46,23 @@ You can send the debug to a device by calling:
 
 ...and that is all.
 
-Have Fun.
+Know Problems With the Code
+---------------------------
 
+The key-handling is wrong. The Manifest/Layout.xml allows for an "android:onClick" field to be set up and
+this will allow for the keyhandling to call a method directly. This means I can lose some of the sub-classes
+that make the code unreadabled in places.
+
+Second, the game itself does not handle 5-card tracks and early exit on a unbeatable player score. But, this
+is just demo learning code and not a real game.
+
+Don't keep the scores, the logic is there now but I don't see the purpose of actually doing it.
+
+Have not played with signed deployments, but that seems simple in the docs.
+
+There is probably more but can't be bothered thinking about them. 
+
+Have Fun.
 Peter.
+
+
