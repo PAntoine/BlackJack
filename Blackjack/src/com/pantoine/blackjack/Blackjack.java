@@ -24,6 +24,7 @@ public class Blackjack extends Activity
 	AlertDialog	m_lose;
 	Button		m_twist;
 	Button		m_stick;
+	String		m_player_name;
 	int			m_num_dealt;
 	Integer		m_hand_value;
 	Integer		m_dealer_value;
@@ -114,11 +115,6 @@ public class Blackjack extends Activity
 	public void onStart()
 	{
 		super.onStart();
-
-		Intent start_intent = getIntent();
-
-		String title = "Blackjack: " + start_intent.getStringExtra("player_name");
-		setTitle(title);
 	}
 	
 	public void reDeal()
@@ -159,25 +155,47 @@ public class Blackjack extends Activity
 		m_dealer_text.setText("[Dealer] 0");
 	}
 
+	@Override
 	public void onPause()
 	{
 		super.onPause();
 		Log.v("Blackjack","onPause() called");
+
+		// save the state
+		SharedPreferences.Editor edit = getSharedPreferences(m_player_name,MODE_PRIVATE).edit();
+		edit.putInt("number_played",m_num_games_played);
+		edit.putInt("number_won",m_num_games_won);
+		edit.outInt("number_lost",m_num_games_lost);
+		edit.commit();
 	}
 
+	@Override
 	public void onResume()
 	{
 		super.onResume();
 
+		Intent start_intent = getIntent();
+
+		m_player_name = start_intent.getStringExtra("player_name");
+		String title = "Blackjack: " + m_player_name;
+		setTitle(title);
+
+		SharedPreferences preferences = getSharedPreferences(m_player_name,MODE_PRIVATE);
+		m_num_games_played = preferences.getInt("number_played",0);
+		m_num_games_won = preferences.getInt("number_won",0);
+		m_num_games_lost = preferences.getInt("number_lost",0);
+
 		Log.v("Blackjack","onResume() called");
 	}
 
+	@Override
 	public void onStop()
 	{
 		super.onStop();
 		Log.v("Blackjack","onStop() called");
 	}
 
+	@Override
 	public void onDestroy()
 	{
 		super.onDestroy();
