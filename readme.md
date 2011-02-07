@@ -62,6 +62,13 @@ Have not played with signed deployments, but that seems simple in the docs.
 
 There is probably more but can't be bothered thinking about them. 
 
+Oh, weird things
+----------------
+
+Added a lump of code that handles JNI. It has nothing to do with Blackjack but was convenient place to put it.
+So it's here.
+
+
 Have Fun.
 Peter.
 
