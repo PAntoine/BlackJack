@@ -15,6 +15,30 @@ extern "C" {
 JNIEXPORT jobjectArray JNICALL Java_com_antoine_jni_java_1adapter_HNCP_1JNI_1getChannelGridRow
   (JNIEnv *, jobject, jint, jint, jint, jint);
 
+/*
+ * Class:     com_antoine_jni_java_adapter
+ * Method:    HNCP_JNI_connect
+ * Signature: (II)I
+ */
+JNIEXPORT jint JNICALL Java_com_antoine_jni_java_1adapter_HNCP_1JNI_1connect
+  (JNIEnv *, jobject, jint, jint);
+
+/*
+ * Class:     com_antoine_jni_java_adapter
+ * Method:    HNCP_JNI_SendData
+ * Signature: (I[BI)I
+ */
+JNIEXPORT jint JNICALL Java_com_antoine_jni_java_1adapter_HNCP_1JNI_1SendData
+  (JNIEnv *, jobject, jint, jbyteArray, jint);
+
+/*
+ * Class:     com_antoine_jni_java_adapter
+ * Method:    HNCP_JNI_GetData
+ * Signature: (I[BI)I
+ */
+JNIEXPORT jint JNICALL Java_com_antoine_jni_java_1adapter_HNCP_1JNI_1GetData
+  (JNIEnv *, jobject, jint, jbyteArray, jint);
+
 #ifdef __cplusplus
 }
 #endif

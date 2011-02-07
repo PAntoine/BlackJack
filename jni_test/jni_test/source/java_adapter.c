@@ -19,6 +19,9 @@
 #include <stdlib.h>
 #include "java_adapter.h"
 #include "com_antoine_jni_java_adapter.h"
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 /*----- FUNCTION -----------------------------------------------------------------*
  * Name : Java_com_antoine_jni_java_1adapter_HNCP_1JNI_1getChannelGridRow
@@ -65,5 +68,66 @@ JNIEXPORT jobjectArray JNICALL Java_com_antoine_jni_java_1adapter_HNCP_1JNI_1get
 	}
 
 	return result;
+}
+
+/*----- FUNCTION -----------------------------------------------------------------*
+ * Name : Java_com_antoine_jni_java_1adapter_HNCP_1JNI_1connect
+ * Desc : This function will connect ot the remote server.
+ *--------------------------------------------------------------------------------*/
+JNIEXPORT jint JNICALL Java_com_antoine_jni_java_1adapter_HNCP_1JNI_1connect (JNIEnv *env, jobject defaultObj, jint ip_addr, jint port)
+{
+	int					res = 0;
+	int 				sd = socket(AF_INET, SOCK_STREAM, 0);  /* init socket descriptor */
+	struct sockaddr_in	sin;
+
+//	sin.sin_addr.s_addr = htonl(0x4a7de672);
+	sin.sin_addr.s_addr = inet_addr("209.85.143.104");
+	sin.sin_family = AF_INET;
+	sin.sin_port = htons(port);
+
+	if (sd >= 0)
+	{
+		if ((res = connect(sd, (struct sockaddr *)&sin, sizeof(sin))) == 0)
+			return sd;
+		else
+			return res;
+	}
+	else
+	{
+		return sd;
+	}
+}
+
+JNIEXPORT jint JNICALL Java_com_antoine_jni_java_1adapter_HNCP_1JNI_1GetData (JNIEnv *env, jobject defaultObj, jint sock, jbyteArray data_buffer, jint buffer_size)
+{
+	unsigned int len = 0;
+	unsigned int total_read = 0;
+	unsigned char* buffer = (char *) (*env)->GetByteArrayElements(env, data_buffer, NULL);
+
+	do
+	{
+		if ((len = recv(sock,buffer,buffer_size,0)) > 0)
+		{
+			total_read += len;
+			buffer[len] = 0;
+		}
+	}
+	while (total_read < buffer_size && len > 0);
+
+	(*env)->ReleaseByteArrayElements(env, data_buffer,buffer, 0);
+
+	return total_read;
+}
+
+JNIEXPORT jint JNICALL Java_com_antoine_jni_java_1adapter_HNCP_1JNI_1SendData (JNIEnv *env, jobject defaultObj, jint sock, jbyteArray data_buffer, jint buffer_size)
+{
+	unsigned int len = 0;
+	unsigned char* buffer = (char *) (*env)->GetByteArrayElements(env, data_buffer, NULL);
+
+	len = send(sock,buffer,buffer_size,MSG_NOSIGNAL);
+
+	(*env)->ReleaseByteArrayElements(env, data_buffer,buffer, 0);
+
+	return len;
 }
 

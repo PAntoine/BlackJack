@@ -1,4 +1,4 @@
-export ANDROID_NDK_ROOT = /home/pantoine-mw/working/android-ndk-r5b
+export ANDROID_NDK_ROOT = /home/peterantoine/development/android-ndk-r5b
 export TOOLROOT = $(ANDROID_NDK_ROOT)/toolchains/arm-eabi-4.4.0/prebuilt/linux-x86/bin/
 export JDK_ROOT=/home/peterantoine/development/jdk1.6.0_22
 export CLASSPATH=classes
@@ -45,8 +45,8 @@ $(PACKAGE_TREE)/%.class : source/%.java
 object/%.o : source/%.c include/com_antoine_jni_java_adapter.h
 	@$(CC) $(CCFLAGS) -c -o $(@) $< -I $(JDK_ROOT)/include -I $(JDK_ROOT)/include/linux -I include $(INCDIRS)
 
-include/java_adapter.h : $(JAVA_SOURCE_FILES)
-	@javah -o $(@) $(CLASS_FILES)
+include/com_antoine_jni_java_adapter.h : $(CLASS_FILES)
+	@javah -o $(@) com.antoine.jni.java_adapter
 
 clean:
 	-@rm -rf object/*

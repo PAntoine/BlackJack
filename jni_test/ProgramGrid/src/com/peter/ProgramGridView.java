@@ -60,10 +60,38 @@ public class ProgramGridView extends View
 
 		hello = new java_adapter();
 
-		if (item == null)
-			Log.v("BLAG","the item is null");
+		byte array[] = new byte[1024];
+		byte send_request[] = "GET /encrypted-area HTTP/1.1#@Host: www.example.com#@#@".getBytes();
+	
+		for (int count=0;count<send_request.length;count++)
+		{
+			if (send_request[count] == '#')
+				send_request[count] = 0x0a;
+			else if (send_request[count] == '@')
+				send_request[count] = 0x0d;
+		}
+
+		int ip_addr = 0xd1558f68;
+		
+		int sock = hello.HNCP_JNI_connect(ip_addr,80);
+
+		Log.v("BLANG","socket: " + Integer.toString(sock));
+
+		if (hello.HNCP_JNI_SendData(sock,array,1024) > 0)
+		{
+			if (hello.HNCP_JNI_GetData(sock,array,1024) > 0)
+			{
+				Log.v("BLANG","got data: " + new String(array));
+			}
+			else
+			{
+				Log.v("BLAG","failed to read the data");
+			}
+		}
 		else
-			Log.v("BLAG","the item returned " + item.length);
+		{
+			Log.v("BLAG","failed to send the data");
+		}
 	} 
       
 	protected void  onSizeChanged  (int w, int h, int oldw, int oldh)

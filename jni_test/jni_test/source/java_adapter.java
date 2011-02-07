@@ -31,6 +31,9 @@ public class java_adapter
 	// The following functions convert the C structures to java
 	// ------------------------------------------------------------
 	public native HNCP_JNI_GridItem[] HNCP_JNI_getChannelGridRow(int channel, int start_time, int end_time, int grid_seconds);
+	public native int HNCP_JNI_connect(int ip_addr, int socket);
+	public native int HNCP_JNI_SendData(int socket, byte[] buffer, int buffer_size);
+	public native int HNCP_JNI_GetData(int socket, byte[] buffer, int buffer_size);
 
 	static
 	{
